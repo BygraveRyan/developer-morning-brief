@@ -1,0 +1,16 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# n8n runtime data
+n8n_data/
+data/*.sqlite
+data/*.db
+
+# OS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
