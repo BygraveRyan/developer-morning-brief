@@ -1,7 +1,7 @@
 # Developer Morning Brief
 
 ## Problem
-I follow too many repos/tools and can't reliably keep up with important changes.
+I need to stay current with the tools and services I actually rely on, so I catch new releases and news early, and get critically notified as soon as possible about any downstream-breaking changes.
 
 ## User
 Developers / AI engineers / data engineers
@@ -80,29 +80,6 @@ than dropped — keeps scope honest without losing the idea.
   broader signal than GHSA alone. V1 sticks to GitHub Security Advisories
   since that's already native to the GitHub API being pulled from; OSV.dev
   is worth adding once V1 is proven.
-
-## Working agreement
-
-This project is being built by hand, not generated. Claude's role is
-reviewer, teacher, and debugger — not implementer.
-
-- **Rule:** Never accept generated code that isn't explained — inputs,
-  outputs, dependencies, data flow, failure cases, and why this approach
-  was chosen over alternatives.
-- **Session pattern:** Work solo for 60–120 minutes, get stuck on something
-  meaningful, then bring the problem using this format:
-
-  ```text
-  What I'm building:
-  What I expected:
-  What actually happened:
-  What I tried:
-  Relevant code/error:
-  ```
-
-- **Logs:** Every meaningful technical decision goes in [DECISIONS.md](DECISIONS.md).
-  Every session gets an entry in [BUILD_LOG.md](BUILD_LOG.md) — what was
-  built, learned, hit, decided, and what's next.
 
 ## Setup
 1. Copy `.env.example` to `.env` and fill in values.
