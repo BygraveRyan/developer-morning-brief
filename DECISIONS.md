@@ -44,3 +44,9 @@ Format:
 **Alternatives considered:** SMTP; Resend/SendGrid - more control over deliverability and templating, but unnecessary complexity for a single-recipient V1.
 **Revisit when:** Need better deliverability guarantees, richer templating, or send volume outgrows Gmail's sending limits.
 **Date:** 2026-08-25
+
+## Decision: n8n built-in GitHub node over HTTP Request node
+**Why:** Faster to configure - native resource/operation dropdowns (release, issue, pullRequest, etc.) instead of hand-building API calls.
+**Alternatives considered:** HTTP Request node - full control over the raw REST/GraphQL API and better visibility into request/response shape for learning; required for GitHub Security Advisories, which the built-in node doesn't expose as a resource.
+**Revisit when:** Building the security-advisory pull (part of V1's detect list) - will likely need the HTTP Request node for that piece specifically, so this may end up a hybrid rather than either/or.
+**Date:** 2026-08-27

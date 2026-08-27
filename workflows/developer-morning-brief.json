@@ -1,0 +1,82 @@
+{
+  "name": "developer-morning-brief",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        0
+      ],
+      "id": "473b7b43-1043-4af3-aacd-2801e59fde8b",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "release",
+        "operation": "getAll",
+        "owner": {
+          "__rl": true,
+          "value": "n8n-io",
+          "mode": "list",
+          "cachedResultName": "n8n-io",
+          "cachedResultUrl": "https://github.com/n8n-io"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://github.com/n8n-io/n8n"
+        },
+        "limit": 5
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "64858965-a3e1-4f1d-ad23-67c4fcc242ea",
+      "name": "Get many releases",
+      "webhookId": "30e56451-89a4-40b3-9897-c47276ac5561",
+      "credentials": {
+        "githubApi": {
+          "id": "QrFjo1tYFkeLwP1G",
+          "name": "GitHub account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get many releases",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": true
+  },
+  "versionId": "2058b891-0950-4072-a374-1eb719c993dd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5267bd58f2bd6eb5a13cef6b425f1202360f52392cfbd471de004f555cc69b11"
+  },
+  "nodeGroups": [],
+  "id": "L6dKLmbLRdFp1zrh",
+  "tags": []
+}
