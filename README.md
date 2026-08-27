@@ -14,7 +14,7 @@ important happened until it's already caused a problem.
 Every morning, receive one clean email containing the important changes
 across my selected GitHub repositories. Instead of checking a dozen tabs
 or hoping a GitHub notification didn't get buried, one email tells you
-what changed and whether it's worth reacting to today — turning silence
+what changed and whether it's worth reacting to today - turning silence
 into a signal, not a blind spot.
 
 ## V1 inputs
@@ -63,7 +63,7 @@ See [examples/sample-email.md](examples/sample-email.md) for a sample of the tar
 
 ## Milestones
 
-Small, sequential slices — not "build the app."
+Small, sequential slices - not "build the app."
 
 - [ ] 1. Get GitHub data
 - [ ] 2. Detect what's new
@@ -77,7 +77,7 @@ Small, sequential slices — not "build the app."
 ## Future additions (V2+)
 
 Ideas raised during design that are deliberately deferred past V1 rather
-than dropped — keeps scope honest without losing the idea.
+than dropped - keeps scope honest without losing the idea.
 
 - **OSV.dev as a security data source.** [OSV.dev](https://osv.dev) is a
   Google-backed open source vulnerability database with a public API,
@@ -95,6 +95,6 @@ than dropped — keeps scope honest without losing the idea.
 4. Import workflows from `workflows/` (once exported).
 
 ## Repo structure
-- `workflows/` — exported n8n workflow JSON
-- `data/` — SQLite database (gitignored, created at runtime)
-- `docker-compose.yml` — n8n container definition
+- `workflows/` - exported n8n workflow JSON
+- `data/` - SQLite database (gitignored, created at runtime)
+- `docker-compose.yml` - n8n container definition

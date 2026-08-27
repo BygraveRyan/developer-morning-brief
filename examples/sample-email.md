@@ -1,14 +1,14 @@
 # Sample email output
 
 Target shape for **Milestone 5: Generate the email**. This isn't literal HTML
-markup — it's the structure, tone, and grouping the real HTML template should
+markup - it's the structure, tone, and grouping the real HTML template should
 reproduce: four severity tiers, one line of context per item, and an explicit
 "why you care" or "recommended action" wherever it adds signal.
 
-The repos below are illustrative — they're meant to show the kind of breadth
-a developer / AI engineer / data engineer would realistically track (AI
-tooling, cloud/infra, data engineering, core frameworks), not a fixed list.
-The real list is whatever repos the user configures.
+The repos below are illustrative - they're meant to show the kind of breadth
+a developer, engineer, or architect would realistically track (AI tooling,
+cloud/infra, data engineering, core frameworks), not a fixed list. The real
+list is whatever repos the user configures.
 
 ```
 ☀️ Your Developer Brief — Monday
