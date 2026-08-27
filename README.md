@@ -4,11 +4,18 @@
 I need to stay current with the tools and services I actually rely on, so I catch new releases and news early, and get critically notified as soon as possible about any downstream-breaking changes.
 
 ## User
-Developers / AI engineers / data engineers
+Developers, engineers, and architects who depend on fast-moving open
+source tools and cloud services. Anyone whose systems break when an
+upstream dependency changes underneath them already knows the drill:
+too many repos to watch manually, and no reliable way to know something
+important happened until it's already caused a problem.
 
 ## V1 outcome
 Every morning, receive one clean email containing the important changes
-across my selected GitHub repositories.
+across my selected GitHub repositories. Instead of checking a dozen tabs
+or hoping a GitHub notification didn't get buried, one email tells you
+what changed and whether it's worth reacting to today — turning silence
+into a signal, not a blind spot.
 
 ## V1 inputs
 - GitHub repositories
