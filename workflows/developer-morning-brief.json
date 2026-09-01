@@ -14,6 +14,27 @@
     },
     {
       "parameters": {
+        "operation": "executeQuery",
+        "query": "  CREATE TABLE IF NOT EXISTS seen_items (\n    id SERIAL PRIMARY KEY,\n    item_type TEXT NOT NULL,\n    source_id TEXT NOT NULL,\n    repo TEXT NOT NULL,\n    published_at TIMESTAMPTZ NOT NULL,\n    ingested_at TIMESTAMPTZ NOT NULL,\n    UNIQUE(item_type, source_id, repo)\n  );",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7,
+      "position": [
+        -48,
+        0
+      ],
+      "id": "0bfce824-3a23-4e11-b59b-aba6ec634154",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "yxKKnb7JaOpN3EZI",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
         "resource": "release",
         "operation": "getAll",
         "owner": {
@@ -35,7 +56,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        0,
+        176,
         0
       ],
       "id": "64858965-a3e1-4f1d-ad23-67c4fcc242ea",
@@ -47,6 +68,96 @@
           "name": "GitHub account"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT source_id\nFROM seen_items\nWHERE item_type = 'release'\n  AND repo = 'n8n-io/n8n';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7,
+      "position": [
+        384,
+        96
+      ],
+      "id": "c14f0031-40f9-4521-97d6-ca550b8c4fe7",
+      "name": "Select seen release IDs",
+      "executeOnce": true,
+      "credentials": {
+        "postgres": {
+          "id": "yxKKnb7JaOpN3EZI",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "id_text",
+              "value": "={{ $json.id.toString() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "a2b96b56-0916-44d6-844d-ef405c4c80b4",
+      "name": "Stringify release id",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        384,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "id_text",
+              "field2": "source_id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0c0d8659-5993-4f65-a0c6-b0518f34c06e",
+      "name": "Compare against seen items",
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        624,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO seen_items (item_type, source_id, repo, published_at, ingested_at)\nVALUES ('release', $1, 'n8n-io/n8n', $2, NOW())\nON CONFLICT (item_type, source_id, repo) DO NOTHING;",
+        "options": {
+          "queryReplacement": "={{ [$json.id, $json.published_at] }}"
+        }
+      },
+      "id": "dca0c93a-c600-498f-81bc-ed46fb1fba99",
+      "name": "Insert new items into seen_items",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7,
+      "position": [
+        944,
+        0
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "yxKKnb7JaOpN3EZI",
+          "name": "Postgres account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -55,7 +166,67 @@
       "main": [
         [
           {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
             "node": "Get many releases",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many releases": {
+      "main": [
+        [
+          {
+            "node": "Select seen release IDs",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Stringify release id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select seen release IDs": {
+      "main": [
+        [
+          {
+            "node": "Compare against seen items",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Stringify release id": {
+      "main": [
+        [
+          {
+            "node": "Compare against seen items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare against seen items": {
+      "main": [
+        [
+          {
+            "node": "Insert new items into seen_items",
             "type": "main",
             "index": 0
           }
@@ -71,7 +242,7 @@
     "callerPolicy": "workflowsFromSameOwner",
     "availableInMCP": true
   },
-  "versionId": "2058b891-0950-4072-a374-1eb719c993dd",
+  "versionId": "b8eada4c-abdd-4376-81c6-7a3362b249b3",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "5267bd58f2bd6eb5a13cef6b425f1202360f52392cfbd471de004f555cc69b11"
