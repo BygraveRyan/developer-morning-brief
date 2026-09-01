@@ -3,6 +3,8 @@ services:
     image: docker.n8n.io/n8nio/n8n:latest
     container_name: developer-morning-brief-n8n
     restart: unless-stopped
+    depends_on:
+      - postgres
     ports:
       - "5678:5678"
     environment:
@@ -15,5 +17,19 @@ services:
       - n8n_data:/home/node/.n8n
       - ./data:/data
 
+  postgres:
+    image: postgres:16-alpine
+    container_name: developer-morning-brief-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
 volumes:
   n8n_data:
+  postgres_data:

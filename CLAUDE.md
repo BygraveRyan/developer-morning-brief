@@ -41,9 +41,6 @@ cases, and why this approach was chosen over alternatives.
   messages, chat responses) - use a plain dash instead.
 - Never add an agent name as a commit co-author. Commits on this repo are
   authored solely as the user.
-- Never manually modify auto-generated files (e.g. a future CHANGELOG.md)
-  - if one exists and needs a correction, fix whatever generates it
-  instead.
 - When writing or substantially editing long Markdown files (README.md,
   DECISIONS_ADR.md, BUILD_LOG.md), put each full sentence on its own line.
   Preserve normal Markdown structure (headings, lists, code fences) - just
